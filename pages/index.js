@@ -1,16 +1,15 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useState } from 'react';
 
 export default function Home() {
-  const [query, setQuery] = useState('');
-  const [articles, setArticles] = useState('');
+  const [query, setQuery] = useState(null);
+  const [results, setResults] = useState(null);
 
-  function handleSearch(e) {
+  async function handleSearch(e) {
     e.preventDefault();
 
-    fetch(
+    await fetch(
       `https://newsapi.org/v2/everything?q=${query}&sortBy=popularity&pageSize=10`,
       {
         headers: {
@@ -18,8 +17,7 @@ export default function Home() {
         }})
           .then(res => res.json())
           .then((json) => {
-            setArticles(json)
-            console.log(typeof(articles))
+            setResults(json)
           });    
   }
 
@@ -44,7 +42,30 @@ export default function Home() {
         </form>
       </div>
       <br/>
-        <div>
+        <div>{results && <h2 style={{textAlign: 'center'}}>Showing search results for '{query}'</h2>}
+        { results ?
+          results.articles.map((article) => (
+          <div style={{ display: 'flex', maxWidth: '1024px'}} className={styles.container}>
+            <div>
+              <img src={article.urlToImage} alt={article.source.name} 
+                style={{ 
+                    maxWidth: '15vw', 
+                    borderRadius: '5px'
+                    }}>
+              </img>
+            </div>
+            <div style={{ margin: '0 5%' }}>
+              <h3>{ article.title }</h3>
+              <h4>Author: { article.author }</h4>
+              <a 
+                href={article.url} 
+                target='_blank'
+                className={styles.link}>
+                  <p>Click here to read full article on {article.source.name}</p>
+              </a>
+            </div>
+          </div>
+          )) : <p style={{textAlign: 'center'}}>Your search results will display here</p>}
         </div>
     </>
   )
