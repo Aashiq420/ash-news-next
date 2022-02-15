@@ -29,6 +29,7 @@ export default function Home() {
       <div className={styles.content}>
         <h1>Welcome to Ash News!</h1>
         <p>Search for news below or browse the categories</p>
+        <br />
         <form className={styles.search} onSubmit={handleSearch}>
           <input 
             required
