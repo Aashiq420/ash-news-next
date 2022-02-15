@@ -8,6 +8,8 @@ Firstly, install dependencies:
 npm install
 ```
 
+Create file named '.env' in project root and add API key here as 'NEXT_PUBLIC_NEWS_KEY=apiKey'
+
 Run the development server:
 
 ```bash
