@@ -7,8 +7,6 @@ const NotFound = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      // router.go(-1)
-      // router.go(1)
       router.push('/')
     }, 5000)
   }, [])//empty array here for useEffect lets function only fire on 1st pageload

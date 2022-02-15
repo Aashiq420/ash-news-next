@@ -39,7 +39,8 @@ const Sport = ({ sport }) => {
             <a 
                 href={article.url} 
                 target='_blank'
-                className={styles.link}>
+                className={styles.link}
+                >
                     <p>Click here to read full article on {article.source.name}</p>
             </a>
           </div>

@@ -8,7 +8,6 @@ export default function Home() {
 
   async function handleSearch(e) {
     e.preventDefault();
-
     await fetch(
       `https://newsapi.org/v2/everything?q=${query}&sortBy=popularity&pageSize=10`,
       {
@@ -45,22 +44,25 @@ export default function Home() {
         <div>{results && <h2 style={{textAlign: 'center'}}>Showing search results for '{query}'</h2>}
         { results ?
           results.articles.map((article) => (
-          <div style={{ display: 'flex', maxWidth: '1024px'}} className={styles.container}>
-            <div>
-              <img src={article.urlToImage} alt={article.source.name} 
-                style={{ 
-                    maxWidth: '15vw', 
-                    borderRadius: '5px'
-                    }}>
-              </img>
-            </div>
+          <div 
+            style={{ display: 'flex', maxWidth: '1024px'}} 
+            className={styles.container}>
+              <div>
+                <img src={article.urlToImage} alt={article.source.name} 
+                  style={{ 
+                      maxWidth: '15vw', 
+                      borderRadius: '5px'
+                      }}>
+                </img>
+              </div>
             <div style={{ margin: '0 5%' }}>
               <h3>{ article.title }</h3>
               <h4>Author: { article.author }</h4>
               <a 
                 href={article.url} 
                 target='_blank'
-                className={styles.link}>
+                className={styles.link}
+                >
                   <p>Click here to read full article on {article.source.name}</p>
               </a>
             </div>
